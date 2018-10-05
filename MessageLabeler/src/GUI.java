@@ -23,5 +23,13 @@ public class GUI {
         //window.setLayout(new CardLayout()); //Allows easy change of components
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Exit the program when the exit button is pressed
         window.setTitle("Message Labeling Interface");
+
+        window.add(skipButton);
+        window.add(workRelatedButton);
+        window.add(semiWorkRelatedButton);
+        window.add(message);
+        window.add(notWorkRelatedButton);
+
+        window.setVisible(true);
     }
 }
