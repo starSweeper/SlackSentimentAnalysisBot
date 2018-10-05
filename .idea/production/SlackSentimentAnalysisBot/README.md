@@ -1,0 +1,2 @@
+# SlackSentimentAnalysisBot
+Using the Slack API to analyze messages for work related slack channels, and classify messages as "Work Related", "Somewhat Work Related", and "Off-Topic". At the end of every week it will use this information to rank users by productivity based on how many posts of each category they post and reply to. The point of this project is entertainment and to keep private slack messages and channels on track, it is not meant to be used to track employee productivity for the purposes of discipline.
