@@ -21,17 +21,14 @@ public class GUI {
 
     GUI(){
         //Add components to panels
-        labelButtonPanel.setLayout(new BorderLayout());
-        labelButtonPanel.add(workRelatedButton, BorderLayout.WEST);
-        labelButtonPanel.add(semiWorkRelatedButton, BorderLayout.CENTER);
-        labelButtonPanel.add(notWorkRelatedButton, BorderLayout.EAST);
+        labelButtonPanel.add(workRelatedButton);
+        labelButtonPanel.add(semiWorkRelatedButton);
+        labelButtonPanel.add(notWorkRelatedButton);
 
         skipButtonPanel.add(skipButton);
         messagePanel.add(message);
 
         window.setFocusable(true);
-        //window.requestFocusInWindow();
-        window.setExtendedState(Frame.MAXIMIZED_BOTH);
         window.setLayout(new BorderLayout());
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Exit the program when the exit button is pressed
         window.setTitle("Message Labeling Interface");
@@ -39,6 +36,8 @@ public class GUI {
         window.add(labelButtonPanel, BorderLayout.SOUTH);
         window.add(messagePanel, BorderLayout.CENTER);
         window.add(skipButtonPanel, BorderLayout.NORTH);
+
+        window.pack();
         window.setVisible(true);
     }
 }
