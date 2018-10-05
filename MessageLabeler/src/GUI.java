@@ -15,21 +15,30 @@ public class GUI {
     private JButton semiWorkRelatedButton = new JButton("SEMI WORK RELATED");
     private JButton notWorkRelatedButton = new JButton("NOT WORK RELATED");
     private JTextArea message = new JTextArea();
+    private JPanel labelButtonPanel = new JPanel();
+    private JPanel messagePanel = new JPanel();
+    private JPanel skipButtonPanel = new JPanel();
 
     GUI(){
+        //Add components to panels
+        labelButtonPanel.setLayout(new BorderLayout());
+        labelButtonPanel.add(workRelatedButton, BorderLayout.WEST);
+        labelButtonPanel.add(semiWorkRelatedButton, BorderLayout.CENTER);
+        labelButtonPanel.add(notWorkRelatedButton, BorderLayout.EAST);
+
+        skipButtonPanel.add(skipButton);
+        messagePanel.add(message);
+
         window.setFocusable(true);
         //window.requestFocusInWindow();
         window.setExtendedState(Frame.MAXIMIZED_BOTH);
-        //window.setLayout(new CardLayout()); //Allows easy change of components
+        window.setLayout(new BorderLayout());
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Exit the program when the exit button is pressed
         window.setTitle("Message Labeling Interface");
 
-        window.add(skipButton);
-        window.add(workRelatedButton);
-        window.add(semiWorkRelatedButton);
-        window.add(message);
-        window.add(notWorkRelatedButton);
-
+        window.add(labelButtonPanel, BorderLayout.SOUTH);
+        window.add(messagePanel, BorderLayout.CENTER);
+        window.add(skipButtonPanel, BorderLayout.NORTH);
         window.setVisible(true);
     }
 }
