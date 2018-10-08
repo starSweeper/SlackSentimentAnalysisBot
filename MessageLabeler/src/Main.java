@@ -8,13 +8,12 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args){
         ArrayList<Message> slackMessages = new ArrayList<>();
-
         try{
             FileInputStream messageList = new FileInputStream("messages.txt");
             BufferedReader buffRead = new BufferedReader(new InputStreamReader(messageList));
             String newLine;
             while((newLine = buffRead.readLine()) != null){
-                String[] messageBits = newLine.split("#--%");
+                String[] messageBits = newLine.split(":");
                 Message newMessage = new Message(messageBits[0], messageBits[1]);
                 slackMessages.add(newMessage);
             }

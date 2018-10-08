@@ -1,17 +1,26 @@
+import javax.swing.*;
+
 public class Message {
     private String messageContent;
     private String sender;
+    private JTextArea textArea;
 
-    Message(String content, String author){
+    Message(String author, String content){
         messageContent = content;
         sender = author;
+        textArea = new JTextArea(content);
     }
 
-    private String getMessageContent(){
+    public String getMessageContent(){
         return messageContent;
     }
 
-    private String getSender(){
+    public String getSender(){
         return sender;
     }
+
+    public JTextArea getTextArea(){
+        return textArea;
+    }
+
 }

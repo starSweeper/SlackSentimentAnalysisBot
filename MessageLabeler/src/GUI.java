@@ -6,6 +6,8 @@ import java.awt.*;
 //Needed for ArrayList
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +31,7 @@ public class GUI {
     private JPanel skipButtonPanel = new JPanel();
     private ArrayList<Message> slackMessages;
     private Message currentMessage;
+    private JPanel messageCards = new JPanel(new CardLayout());
 
     GUI(ArrayList<Message> messageList){
         slackMessages = messageList;
@@ -43,34 +46,57 @@ public class GUI {
         skipButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-
+                removeMessage();
+                if((slackMessages.indexOf(currentMessage) + 1) >= slackMessages.size()){
+                    outputData();
+                }
+                else {
+                    displayMessage(slackMessages.get(slackMessages.indexOf(currentMessage) + 1));
+                }
             }
         });
         workRelatedButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                if((slackMessages.indexOf(currentMessage) + 1) >= slackMessages.size()){
+                    outputData();
+                }
+                else {
+                    addToWordCount(currentMessage, workRelatedWords);
+                    removeMessage();
+                    displayMessage(slackMessages.get(slackMessages.indexOf(currentMessage) + 1));
+                }
 
             }
         });
         semiWorkRelatedButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-
+                if((slackMessages.indexOf(currentMessage) + 1) >= slackMessages.size()){
+                    outputData();
+                }
+                else {
+                    addToWordCount(currentMessage, semiWorkRelatedWords);
+                    removeMessage();
+                    displayMessage(slackMessages.get(slackMessages.indexOf(currentMessage) + 1));
+                }
             }
         });
         notWorkRelatedButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-
+                if((slackMessages.indexOf(currentMessage) + 1) >= slackMessages.size()){
+                    outputData();
+                }
+                else {
+                    addToWordCount(currentMessage, nonWorkRelatedWords);
+                    removeMessage();
+                    displayMessage(slackMessages.get(slackMessages.indexOf(currentMessage) + 1));
+                }
             }
         });
 
-        for(int i = 0; i  < slackMessages.size(); i++){
-            currentMessage = slackMessages.get(i);
-
-
-        }
-
+        displayMessage(slackMessages.get(0));
 
         window.setFocusable(true);
         window.setLayout(new BorderLayout());
@@ -81,5 +107,35 @@ public class GUI {
         window.add(skipButtonPanel, BorderLayout.NORTH);
         window.pack();
         window.setVisible(true);
+    }
+
+    private void displayMessage(Message messageToDisplay){
+        currentMessage = messageToDisplay;
+        messagePanel.add(currentMessage.getTextArea());
+        messagePanel.revalidate();
+    }
+
+    private void removeMessage(){
+        messagePanel.remove(currentMessage.getTextArea());
+    }
+
+    private void addToWordCount(Message message, HashMap<String,Integer> map){
+        String[] wordsFound = message.getMessageContent().split(" ");
+        for(int i = 0; i < wordsFound.length; i++){
+            map.put(wordsFound[i], map.getOrDefault(wordsFound[i], 0) + 1);
+        }
+    }
+
+    private void outputData(){
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("messageData.txt"));
+            //bufferedWriter.write("test");
+            for(String word: workRelatedWords.keySet()){
+                bufferedWriter.write(word + " " + workRelatedWords.get(word).toString() + "\n");
+            }
+            bufferedWriter.close();
+        }catch(Exception e){
+            System.out.println("Something went wrong when trying to read messages.txt");
+        }
     }
 }
