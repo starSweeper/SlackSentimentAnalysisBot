@@ -19,6 +19,7 @@ public class Main {
         }
         catch (Exception e){
             System.out.println("Something went wrong when trying to read messages.txt");
+            System.out.println(e.getMessage());
         }
         //Generate Graphical User Interface
         GUI labelMachine = new GUI(slackMessages);

@@ -1,3 +1,0 @@
-Amanda:I'm getting a weird error in pega when I try to add new sections to the dynamic layout. Any suggestions?
-Someone else: Why are there no bagels in the breakroom?
-Amanda: Who wants to go see the new Avengers movie next weekend?
