@@ -47,52 +47,53 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e){
                 removeMessage();
-                if((slackMessages.indexOf(currentMessage) + 1) >= slackMessages.size()){
+                displayMessage(slackMessages.get(slackMessages.indexOf(currentMessage) + 1));
+
+                if((slackMessages.indexOf(currentMessage) + 1) == slackMessages.size()){
                     outputData();
-                }
-                else {
-                    displayMessage(slackMessages.get(slackMessages.indexOf(currentMessage) + 1));
                 }
             }
         });
         workRelatedButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if((slackMessages.indexOf(currentMessage) + 1) >= slackMessages.size()){
+                addToWordCount(currentMessage, 1);
+                removeMessage();
+
+                if((slackMessages.indexOf(currentMessage) + 1) == slackMessages.size()){
                     outputData();
-                }
-                else {
-                    addToWordCount(currentMessage, workRelatedWords);
-                    removeMessage();
-                    displayMessage(slackMessages.get(slackMessages.indexOf(currentMessage) + 1));
+                    return;
                 }
 
+                displayMessage(slackMessages.get(slackMessages.indexOf(currentMessage) + 1));
             }
         });
         semiWorkRelatedButton.addActionListener(new ActionListener(){
             @Override
-            public void actionPerformed(ActionEvent e){
-                if((slackMessages.indexOf(currentMessage) + 1) >= slackMessages.size()){
+            public void actionPerformed(ActionEvent e) {
+                addToWordCount(currentMessage, 2);
+                removeMessage();
+
+                if((slackMessages.indexOf(currentMessage) + 1) == slackMessages.size()){
                     outputData();
+                    return;
                 }
-                else {
-                    addToWordCount(currentMessage, semiWorkRelatedWords);
-                    removeMessage();
-                    displayMessage(slackMessages.get(slackMessages.indexOf(currentMessage) + 1));
-                }
+
+                displayMessage(slackMessages.get(slackMessages.indexOf(currentMessage) + 1));
             }
         });
         notWorkRelatedButton.addActionListener(new ActionListener(){
             @Override
-            public void actionPerformed(ActionEvent e){
-                if((slackMessages.indexOf(currentMessage) + 1) >= slackMessages.size()){
+            public void actionPerformed(ActionEvent e) {
+
+                removeMessage();
+                addToWordCount(currentMessage, 3);
+
+                if((slackMessages.indexOf(currentMessage) + 1) == slackMessages.size()){
                     outputData();
+                    return;
                 }
-                else {
-                    addToWordCount(currentMessage, nonWorkRelatedWords);
-                    removeMessage();
-                    displayMessage(slackMessages.get(slackMessages.indexOf(currentMessage) + 1));
-                }
+                displayMessage(slackMessages.get(slackMessages.indexOf(currentMessage) + 1));
             }
         });
 
@@ -105,6 +106,7 @@ public class GUI {
         window.add(labelButtonPanel, BorderLayout.SOUTH);
         window.add(messagePanel, BorderLayout.CENTER);
         window.add(skipButtonPanel, BorderLayout.NORTH);
+        window.setPreferredSize(new Dimension(800, 300));
         window.pack();
         window.setVisible(true);
     }
@@ -119,10 +121,27 @@ public class GUI {
         messagePanel.remove(currentMessage.getTextArea());
     }
 
-    private void addToWordCount(Message message, HashMap<String,Integer> map){
-        String[] wordsFound = message.getMessageContent().split(" ");
+    private void addToWordCount(Message message, int whichMap){
+        String[] wordsFound = message.getMessageContent().replaceAll("[^A-Za-z0-9 ]", "").split(" ");
+        int workAdd = 0;
+        int semiWorkAdd = 0;
+        int nonWorkAdd = 0;
+
+        if(whichMap == 1){
+            workAdd = 1;
+        }
+        else if(whichMap == 2){
+            semiWorkAdd = 1;
+        }
+        else{
+            nonWorkAdd = 1;
+        }
+
+
         for(int i = 0; i < wordsFound.length; i++){
-            map.put(wordsFound[i], map.getOrDefault(wordsFound[i], 0) + 1);
+            workRelatedWords.put(wordsFound[i], workRelatedWords.getOrDefault(wordsFound[i], 0) + workAdd);
+            semiWorkRelatedWords.put(wordsFound[i], semiWorkRelatedWords.getOrDefault(wordsFound[i], 0) + semiWorkAdd);
+            nonWorkRelatedWords.put(wordsFound[i], nonWorkRelatedWords.getOrDefault(wordsFound[i], 0) + nonWorkAdd);
         }
     }
 
@@ -131,11 +150,27 @@ public class GUI {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("messageData.txt"));
             //bufferedWriter.write("test");
             for(String word: workRelatedWords.keySet()){
-                bufferedWriter.write(word + " " + workRelatedWords.get(word).toString() + "\n");
+                bufferedWriter.write(word + " " + workRelatedWords.get(word).toString() + " " +
+                        semiWorkRelatedWords.get(word).toString() + " "
+                        + nonWorkRelatedWords.get(word).toString() + "\n");
             }
             bufferedWriter.close();
         }catch(Exception e){
             System.out.println("Something went wrong when trying to read messages.txt");
         }
+
+        removeMessage();
+        JTextArea allDoneMessage = new JTextArea("Nothing left for you to label. Feel free to exit!");
+        allDoneMessage.setEditable(false);
+        allDoneMessage.setPreferredSize(new Dimension(800, 300));
+        allDoneMessage.setLineWrap(true);
+        allDoneMessage.setWrapStyleWord(true);
+        messagePanel.add(allDoneMessage);
+        messagePanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        messagePanel.revalidate();
+        skipButton.setEnabled(false);
+        workRelatedButton.setEnabled(false);
+        semiWorkRelatedButton.setEnabled(false);
+        notWorkRelatedButton.setEnabled(false);
     }
 }

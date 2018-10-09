@@ -13,8 +13,7 @@ public class Main {
             BufferedReader buffRead = new BufferedReader(new InputStreamReader(messageList));
             String newLine;
             while((newLine = buffRead.readLine()) != null){
-                String[] messageBits = newLine.split(":");
-                Message newMessage = new Message(messageBits[0], messageBits[1]);
+                Message newMessage = new Message(newLine);
                 slackMessages.add(newMessage);
             }
         }
