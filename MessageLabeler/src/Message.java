@@ -1,22 +1,22 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Message {
     private String messageContent;
-    private String sender;
     private JTextArea textArea;
 
-    Message(String author, String content){
+    Message(String content){
         messageContent = content;
-        sender = author;
         textArea = new JTextArea(content);
+        textArea.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setPreferredSize(new Dimension(800, 300));
+        textArea.setEditable(false);
     }
 
     public String getMessageContent(){
         return messageContent;
-    }
-
-    public String getSender(){
-        return sender;
     }
 
     public JTextArea getTextArea(){
