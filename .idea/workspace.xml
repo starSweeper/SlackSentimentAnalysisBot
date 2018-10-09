@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="MessageLabeler" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8cf7fd6-1def-4195-9e83-c8519d6b5733" name="Default Changelist" comment="" />
+    <list default="true" id="a8cf7fd6-1def-4195-9e83-c8519d6b5733" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/MessageLabeler/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/GUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/GUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/GUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/GUI$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/GUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/GUI$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/GUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/Message.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/MessageLabeler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/MessageLabeler/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/messageData.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/messages.txt" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/production/SlackSentimentAnalysisBot/messages.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MessageLabeler/messageData.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MessageLabeler/messages.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MessageLabeler/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/MessageLabeler/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messageData.txt" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +35,9 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="2" />
+          <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.24" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -29,38 +52,33 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="4236" />
+          <entry key="JAVA" value="4394" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="4236" />
+          <entry key="java" value="4394" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MessageLabeler/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="33">
-              <caret line="63" column="22" lean-forward="true" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4003#4004#0" expanded="true" />
-                <element signature="e#4068#4069#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="136">
+              <caret line="8" column="30" lean-forward="true" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MessageLabeler/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="46" lean-forward="true" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+            <state relative-caret-position="238">
+              <caret line="17" column="72" lean-forward="true" selection-start-line="17" selection-start-column="72" selection-end-line="17" selection-end-column="72" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -71,14 +89,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MessageLabeler/src/Message.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
+            <state relative-caret-position="306">
               <caret line="24" selection-start-line="24" selection-end-line="24" />
               <folding>
-                <element signature="e#337#338#0" expanded="true" />
-                <element signature="e#358#359#0" expanded="true" />
-                <element signature="e#411#412#0" expanded="true" />
-                <element signature="e#432#433#0" expanded="true" />
-                <element signature="e#467#468#0" expanded="true" />
+                <element signature="e#466#467#0" expanded="true" />
                 <element signature="e#497#498#0" expanded="true" />
               </folding>
             </state>
@@ -105,13 +119,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/MessageLabeler/src/Main.java" />
         <option value="$PROJECT_DIR$/MessageLabeler/src/Message.java" />
         <option value="$PROJECT_DIR$/MessageLabeler/src/GUI.java" />
+        <option value="$PROJECT_DIR$/MessageLabeler/src/Main.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
@@ -121,41 +135,12 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="SlackSentimentAnalysisBot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SlackSentimentAnalysisBot" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SlackSentimentAnalysisBot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SlackSentimentAnalysisBot" type="462c0819:PsiDirectoryNode" />
-              <item name="MessageLabeler" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SlackSentimentAnalysisBot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SlackSentimentAnalysisBot" type="462c0819:PsiDirectoryNode" />
-              <item name="MessageLabeler" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SlackSentimentAnalysisBot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539041951820" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539098151928" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/java-json.jar.zip!/" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
@@ -200,7 +185,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.18017058" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -211,7 +196,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -220,7 +205,6 @@
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Messages" order="10" />
-      <window_info anchor="right" id="Maven Projects" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -228,22 +212,26 @@
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/MessageLabeler/src/GUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="30" lean-forward="true" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MessageLabeler/src/Message.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
+        <state relative-caret-position="306">
           <caret line="24" selection-start-line="24" selection-end-line="24" />
           <folding>
-            <element signature="e#337#338#0" expanded="true" />
-            <element signature="e#358#359#0" expanded="true" />
-            <element signature="e#411#412#0" expanded="true" />
-            <element signature="e#432#433#0" expanded="true" />
-            <element signature="e#467#468#0" expanded="true" />
+            <element signature="e#466#467#0" expanded="true" />
             <element signature="e#497#498#0" expanded="true" />
           </folding>
         </state>
@@ -251,22 +239,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MessageLabeler/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="46" lean-forward="true" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+        <state relative-caret-position="238">
+          <caret line="17" column="72" lean-forward="true" selection-start-line="17" selection-start-column="72" selection-end-line="17" selection-end-column="72" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MessageLabeler/src/GUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="63" column="22" lean-forward="true" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4003#4004#0" expanded="true" />
-            <element signature="e#4068#4069#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -277,10 +253,12 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <last-edited>MessageLabeler</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
