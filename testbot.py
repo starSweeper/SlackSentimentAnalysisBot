@@ -87,7 +87,9 @@ def prepare_training_data(messageFile, wordFile):
 
         message_data.append(Messages(m_list, wr_points, swr_points, nwr_points))
 
-   # def train_svm:
+
+    def train_svm:
+        
 
 
 

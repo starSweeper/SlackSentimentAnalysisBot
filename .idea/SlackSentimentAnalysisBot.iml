@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
-    <exclude-output />
+  <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/MessageLabeler/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.7 (SlackSentimentAnalysisBot)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="jar://$USER_HOME$/Downloads/java-json.jar.zip!/" />
         </CLASSES>
-        <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
