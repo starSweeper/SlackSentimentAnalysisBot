@@ -7,7 +7,7 @@ from sklearn import svm
 
 # instantiate Slack client
 slack_client = SlackClient('xoxb-329154375397-449717336870-ba49ankfQ51O5knv3gcsOTLn')
-# starterbot's user ID in Slack: value is assigned after the bot starts up
+# starterbot's user ID in Slack
 
 starterbot_id = None
 
@@ -88,7 +88,7 @@ def prepare_training_data(messageFile, wordFile):
         message_data.append(Messages(m_list, wr_points, swr_points, nwr_points))
 
 
-    def train_svm:
+    #def train_svm:
         
 
 
