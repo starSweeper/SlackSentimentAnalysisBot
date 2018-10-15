@@ -26,6 +26,7 @@ public class GUI {
     private JButton semiWorkRelatedButton = new JButton("SEMI WORK RELATED");
     private JButton notWorkRelatedButton = new JButton("NOT WORK RELATED");
     private ArrayList<JPanel> messages = new ArrayList<>();
+    private ArrayList<Integer> labels = new ArrayList<>();
     private JPanel labelButtonPanel = new JPanel();
     private JPanel messagePanel = new JPanel();
     private JPanel skipButtonPanel = new JPanel();
@@ -49,6 +50,7 @@ public class GUI {
                 removeMessage();
                 displayMessage(slackMessages.get(slackMessages.indexOf(currentMessage) + 1));
 
+                labels.add(-1);
                 if((slackMessages.indexOf(currentMessage) + 1) == slackMessages.size()){
                     outputData();
                 }
@@ -57,6 +59,7 @@ public class GUI {
         workRelatedButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                labels.add(1);
                 addToWordCount(currentMessage, 1);
                 removeMessage();
 
@@ -71,6 +74,7 @@ public class GUI {
         semiWorkRelatedButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                labels.add(2);
                 addToWordCount(currentMessage, 2);
                 removeMessage();
 
@@ -85,7 +89,7 @@ public class GUI {
         notWorkRelatedButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                labels.add(3);
                 removeMessage();
                 addToWordCount(currentMessage, 3);
 
@@ -145,7 +149,20 @@ public class GUI {
         }
     }
 
+    private void createLabelsFile(){
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("labels.txt"));
+            for(int label : labels){
+                bufferedWriter.write(label + "\n");
+            }
+            bufferedWriter.close();
+        }catch(Exception e){
+            System.out.println("Something went wrong when trying to read labels.txt");
+        }
+    }
+
     private void outputData(){
+        createLabelsFile();
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("messageData.txt"));
             //bufferedWriter.write("test");

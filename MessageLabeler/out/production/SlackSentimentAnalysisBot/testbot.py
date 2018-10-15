@@ -4,11 +4,14 @@ import re
 import cv2
 import numpy as np
 from slackclient import SlackClient
+#from sklearn import svm
 
 
 # instantiate Slack client
 slack_key = ""  # removed for GitHub. Use a legacy token from https://api.slack.com/custom-integrations/legacy-tokens
 slack_client = SlackClient(slack_key)
+
+starterbot_id = None  # do we need this?
 
 pulled_messages = []
 
@@ -21,6 +24,7 @@ class Messages:
         self.work_related_points = wr
         self.semi_work_related_points = swr
         self.non_work_related_points = nwr
+
 
     def set_label(self, new_label):
         label = new_label
@@ -120,7 +124,6 @@ def prepare_svm_data(message_list):
 def normalize(value):
     return ((value - 0) / (100 - 0)) * (1 - (-1)) + (-1)
 
-
 def listen(channel):
     if slack_client.rtm_connect():
         slack_client.api_call("channel.mark", channel=channel)
@@ -129,12 +132,6 @@ def listen(channel):
             time.sleep(1)
     else:
         print("Connection Failed")
-
-
-def get_conversation_history(channel):
-    messages = slack_client.api_call("conversations.history", channel=channel)
-    for msg in messages['messages']:
-        print_to_message_file(channel, re.sub("\n", " ", msg['text']) + "\n")
 
 
 def train_svm(training_data, labels, file_name='svm_data.dat'):
@@ -173,6 +170,5 @@ def test_svm(file_name, testing_data, labels,):
 
 # testing, enter a channel ID between the quotes (find in URL)
 # send_a_message("I'm so excited to start judging you and your conversations!!", "")
-#listen("")
+# listen("")
 # prepare_training_data("messages.txt", "messageData.txt")
-#get_conversation_history("")

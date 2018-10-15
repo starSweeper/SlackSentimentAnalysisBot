@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MessageLabeler">
+    <output-path>$PROJECT_DIR$/.idea/artifacts/MessageLabeler</output-path>
+    <root id="archive" name="SlackSentimentAnalysisBot.jar">
+      <element id="module-output" name="SlackSentimentAnalysisBot" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/java-json.jar.zip" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
