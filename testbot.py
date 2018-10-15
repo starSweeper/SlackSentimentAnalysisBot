@@ -2,18 +2,19 @@ import os
 import time
 import re
 from slackclient import SlackClient
-from sklearn import svm
+#from sklearn import svm
 
 
 # instantiate Slack client
-slack_client = SlackClient('xoxb-329154375397-449717336870-ba49ankfQ51O5knv3gcsOTLn')
-# starterbot's user ID in Slack
+slack_key = "" #removed for GitHub. Use a legacy token from https://api.slack.com/custom-integrations/legacy-tokens
+slack_client = SlackClient(slack_key)
 
-starterbot_id = None
+starterbot_id = None #do we need this?
 
 pulled_messages = []
 word_data = []
 message_data = []
+
 
 class Messages:
     def __init__(self, m, wr, swr, nwr):
@@ -35,17 +36,15 @@ def parse_bot_commands(slack_events):
     global pulled_messages
     for event in slack_events:
         if event['type'] == 'message':
-            pulled_messages = pulled_messages.append("\n" + event['text'])
+            pulled_messages.append("\n" + event['text'])
+            print_to_message_file(event['channel'],re.sub("\n"," ",event['text']) + "\n")
             print(event['text'])
+
+            #For demo purposes only ;P
+            slack_client.api_call("reactions.add", name="d", channel=event['channel'], timestamp = event['ts'])
+            slack_client.api_call("reactions.add", name="a", channel=event['channel'], timestamp=event['ts'])
+            slack_client.api_call("reactions.add", name="b", channel=event['channel'], timestamp=event['ts'])
     #return pulled_messages
-
-
-if slack_client.rtm_connect():
-    while slack_client.server.connected is True:
-       parse_bot_commands(slack_client.rtm_read())
-       time.sleep(1)
-    else:
-        print("Connection Failed")
 
 
 def print_to_message_file(channel_name, message):
@@ -88,9 +87,29 @@ def prepare_training_data(messageFile, wordFile):
         message_data.append(Messages(m_list, wr_points, swr_points, nwr_points))
 
 
-    #def train_svm:
-        
+def send_a_message(message, channel):
+    message_info = slack_client.api_call(
+        "chat.postMessage",
+        channel=channel,
+        text=message,
+        username='SSA Bot',
+        icon_emoji=':robot_face:'
+    )
+
+    slack_client.api_call("reactions.add", name="robot_face", channel=channel, timestamp=message_info['ts'])
 
 
+def listen(channel):
+    if slack_client.rtm_connect():
+        slack_client.api_call("channel.mark", channel=channel)
+        while slack_client.server.connected is True:
+            parse_bot_commands(slack_client.rtm_read())
+            time.sleep(1)
+    else:
+        print("Connection Failed")
 
+
+#testing, enter a channel ID between the quotes (find in URL)
+#send_a_message("Hello, world", "")
+#listen("")
 #prepare_training_data("messages.txt", "messageData.txt")

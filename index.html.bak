@@ -8,7 +8,7 @@
 	determine who in the group is making the most work related posts, the most "semi" work related posts, and the most off topic posts.
 	Once a week the SSA Bot will release a ranking of the top contributers in each catagory. This tool is meant for fun and to help keep
 	slack messages productive. It is not meant to be used to disipline employees.
-	
-	
-	<a href="https://slack.com/oauth/authorize?client_id=11179454721.454441227763&scope=bot"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+	<br>
+	<br>Click the button below to authorize SSA Bot!
+	<br><a href="https://slack.com/oauth/authorize?client_id=11179454721.454441227763&scope=bot"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
 </body>
