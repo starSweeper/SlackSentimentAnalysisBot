@@ -99,8 +99,8 @@
       <file leaf-file-name="testbot.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testbot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2589">
-              <caret line="5" column="35" lean-forward="false" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+            <state relative-caret-position="187">
+              <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -134,6 +134,12 @@
       <find>pulled</find>
       <find>sc</find>
       <find>starterbot</find>
+      <find>prepare_svm</find>
+      <find>message_list</find>
+      <find>-1</find>
+      <find>label</find>
+      <find>print</find>
+      <find>reply_to</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -150,7 +156,6 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
     <option name="width" value="795" />
     <option name="height" value="860" />
   </component>
@@ -420,8 +425,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testbot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2589">
-          <caret line="5" column="35" lean-forward="false" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+        <state relative-caret-position="187">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

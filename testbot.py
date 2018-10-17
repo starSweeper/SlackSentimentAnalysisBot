@@ -2,14 +2,17 @@ import os
 import time
 import re
 import cv2
+import random
 import numpy as np
 from slackclient import SlackClient
+#from sklearn import svm
 
 
 # instantiate Slack client
 slack_key = ""  # removed for GitHub. Use a legacy token from https://api.slack.com/custom-integrations/legacy-tokens
 slack_client = SlackClient(slack_key)
 
+word_data = []
 pulled_messages = []
 
 
@@ -38,14 +41,30 @@ def parse_bot_commands(slack_events):
     global pulled_messages
     for event in slack_events:
         if event['type'] == 'message':
-            pulled_messages.append("\n" + event['text'])
-            print_to_message_file(event['channel'],re.sub("\n"," ",event['text']) + "\n")
-            print(event['text'])
+            if "thread_ts" not in event:
+                print(event)
+                pulled_messages.append("\n" + event['text'])
+                print_to_message_file(event['channel'],re.sub("\n"," ",event['text']) + "\n")
+                print(event['text'])
+                bot_spy(event)
 
-            # For demo purposes only ;P
-            slack_client.api_call("reactions.add", name="d", channel=event['channel'], timestamp=event['ts'])
-            slack_client.api_call("reactions.add", name="a", channel=event['channel'], timestamp=event['ts'])
-            slack_client.api_call("reactions.add", name="b", channel=event['channel'], timestamp=event['ts'])
+
+def bot_spy(event):
+    channel = event['channel']
+    timestamp = event['ts']
+
+    if str("bot").lower() in event['text']:
+        reply_to_message("My ears are burning",timestamp,channel)
+        react_to_message("ear", channel, timestamp)
+        react_to_message("fire", channel, timestamp)
+    if str("amanda").lower() in event['text']:
+        react_to_message("princess:skin-tone-5",channel,timestamp)
+    #if "":
+    #    reply_and_react("","",channel,timestamp)
+    #if:
+    #    reply_and_react("", "", channel, timestamp)
+    #if:
+    #    reply_and_react("", "", channel, timestamp)
 
 
 def print_to_message_file(channel_name, message):
@@ -59,7 +78,7 @@ def print_to_message_file(channel_name, message):
 
 def get_message_points(message_file, word_file):
     message_data = []
-    word_data = []
+    global word_data
     word_lines = tuple(open(word_file, 'r'))
     message_lines = tuple(open(message_file, 'r'))
 
@@ -75,28 +94,57 @@ def get_message_points(message_file, word_file):
 
     # Go through each message in message file and keep track of how many points it earned based off words in the message
     for slack_message in message_lines:
-        wr_points = 0
-        swr_points = 0
-        nwr_points = 0
-        m_list = re.sub(r'[^A-Za-z0-9 ]+', "", slack_message).split(' ')
-        for m_word in m_list:
-            print(m_word)
-            for search_word in word_data:
-                if search_word.word_string == m_word:
-                    wr_points += search_word.work_related_points
-                    swr_points += search_word.semi_work_related_points
-                    nwr_points += search_word.non_work_related_points
-
-        message_data.append(Messages(m_list, wr_points, swr_points, nwr_points))
+        message_data.append(get_message_work_related_count(slack_message))
 
     return message_data
 
 
+def get_message_work_related_count(message):
+    wr_points = 0
+    swr_points = 0
+    nwr_points = 0
+    m_list = re.sub(r'[^A-Za-z0-9 ]+', "", message).split(' ')
+    for m_word in m_list:
+        for search_word in word_data:
+            if search_word.word_string == m_word:
+                wr_points += search_word.work_related_points
+                swr_points += search_word.semi_work_related_points
+                nwr_points += search_word.non_work_related_points
+
+    return Messages(m_list, wr_points, swr_points, nwr_points)
+
+
 def get_labels(label_file, message_list):
     labels = tuple(open(label_file, 'r'))
+    pulled_labels = []
 
-    for label, message in labels, message_list:
-        message.setLabel(label)
+    for label, message in zip(labels, message_list):
+        message.set_label(int(label))
+        pulled_labels.append(int(label))
+
+    return pulled_labels
+
+
+def react_to_message(emoji, channel, timestamp):
+    slack_client.api_call("reactions.add", name=emoji, channel=channel, timestamp=timestamp)
+
+
+def reply_to_message(message, timestamp, channel):
+    slack_client.api_call(
+        "chat.postMessage",
+        channel=channel,
+        text=message,
+        username='SSA Bot',
+        thread_ts=timestamp,
+        icon_emoji=':robot_face:'
+    )
+
+    slack_client.api_call("reactions.add", name="robot_face", channel=channel, timestamp=timestamp)
+
+
+def reply_and_react(message, emoji, channel, timestamp):
+    reply_to_message(message, timestamp, channel)
+    react_to_message(emoji, channel, timestamp)
 
 
 def send_a_message(message, channel):
@@ -116,9 +164,12 @@ def prepare_svm_data(message_list):
     for msg in message_list:
         svm_data.append([normalize(msg.work_related_points), normalize(msg.semi_work_related_points), normalize(msg.non_work_related_points)])
 
+    return svm_data
+
 
 def normalize(value):
-    return ((value - 0) / (100 - 0)) * (1 - (-1)) + (-1)
+    #return int(((value - 0) / (100 - 0)) * (1 - (-1)) + (-1)) #try swapping the commented lines....
+    return int(value)
 
 
 def listen(channel):
@@ -143,14 +194,18 @@ def train_svm(training_data, labels, file_name='svm_data.dat'):
     svm.setKernel(cv2.ml.SVM_RBF)
     svm.setType(cv2.ml.SVM_C_SVC)
     svm.setC(10)
-    svm.setGamma(115)
+    svm.setGamma(15)
 
     svm.train(np.array(training_data, np.float32), cv2.ml.ROW_SAMPLE, np.array(labels, np.int32))
     svm.save(file_name)
     print("Training complete.\n")
 
 
-def test_svm(file_name, testing_data, labels,):
+def classify_message():
+    svm = cv2.ml.SVM_load('svm_data.dat')
+
+
+def test_svm(testing_data, labels, file_name='svm_data.dat'):
     svm = cv2.ml.SVM_load(file_name)
     result = []
     for i in testing_data:
@@ -176,3 +231,20 @@ def test_svm(file_name, testing_data, labels,):
 #listen("")
 # prepare_training_data("messages.txt", "messageData.txt")
 #get_conversation_history("")
+
+
+#SVM
+m_list = get_message_points("messages.txt", "messageData.txt")
+
+l_list = get_labels("labels.txt", m_list)
+svm_tt_data = prepare_svm_data(m_list)
+
+random.shuffle(svm_tt_data)
+random.shuffle(l_list)
+
+train_data = svm_tt_data[:80]
+test_data = svm_tt_data[20:]
+
+
+train_svm(train_data, l_list[:80])
+print("SVM was " + str(test_svm(test_data, l_list[20:])) + "% accurate")
