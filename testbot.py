@@ -5,7 +5,6 @@ import cv2
 import random
 import numpy as np
 from slackclient import SlackClient
-#from sklearn import svm
 
 
 # instantiate Slack client
@@ -39,32 +38,50 @@ class Words:
 
 def parse_bot_commands(slack_events):
     global pulled_messages
-    for event in slack_events:
-        if event['type'] == 'message':
-            if "thread_ts" not in event:
-                print(event)
-                pulled_messages.append("\n" + event['text'])
-                print_to_message_file(event['channel'],re.sub("\n"," ",event['text']) + "\n")
-                print(event['text'])
-                bot_spy(event)
-
+    try:
+        for event in slack_events:
+            if event['type'] == 'message':
+                if "thread_ts" not in event:
+                    pulled_messages.append("\n" + event['text'])
+                    print_to_message_file(event['channel'],re.sub("\n"," ",event['text']) + "\n")
+                    bot_spy(event)
+    except:
+        print("Tell them to please stop posting threads")
 
 def bot_spy(event):
     channel = event['channel']
     timestamp = event['ts']
 
-    if str("bot").lower() in event['text']:
-        reply_to_message("My ears are burning",timestamp,channel)
-        react_to_message("ear", channel, timestamp)
-        react_to_message("fire", channel, timestamp)
-    if str("amanda").lower() in event['text']:
-        react_to_message("princess:skin-tone-5",channel,timestamp)
-    #if "":
-    #    reply_and_react("","",channel,timestamp)
-    #if:
-    #    reply_and_react("", "", channel, timestamp)
-    #if:
-    #    reply_and_react("", "", channel, timestamp)
+    if channel != "" and channel != "" and channel != "" and channel != "":
+        if "bot"in event['text'].lower():
+            reply_to_message(randomMessage("botTalk.txt"),timestamp,channel)
+            react_to_message("ear", channel, timestamp)
+            react_to_message("fire", channel, timestamp)
+        if "scrum" in event['text'].lower():
+            reply_to_message("BINGO", timestamp, channel)
+        if "dab"in event['text'].lower():
+            reply_to_message(":d::a::b:cry:", timestamp, channel)
+        if "kacey"in event['text'].lower():
+            reply_to_message(":t-rex:", timestamp, channel)
+        if "anthony"in event['text'].lower():
+            reply_to_message(":ant::honey_pot:", timestamp, channel)
+        if "amanda"in event['text'].lower():
+            reply_to_message(":princess::skin-tone-5:", timestamp, channel)
+        if "edgar" in event['text'].lower():
+            reply_to_message(':taco:', timestamp,channel)
+        if "jordan" in event['text'].lower():
+            reply_to_message(':aperture_science:', timestamp, channel)
+        if "junnaid" in event['text'].lower():
+            reply_to_message(':donut::crossed-swords:', timestamp, channel)
+        if "thread" in event['text'].lower():
+            reply_to_message("No. No threads. Stop it.", timestamp, channel)
+
+
+def randomMessage(file_name):
+    response_list = tuple(open(file_name, 'r'))
+
+    return random.choice(response_list)
+
 
 
 def print_to_message_file(channel_name, message):
@@ -130,7 +147,7 @@ def react_to_message(emoji, channel, timestamp):
 
 
 def reply_to_message(message, timestamp, channel):
-    slack_client.api_call(
+    response = slack_client.api_call(
         "chat.postMessage",
         channel=channel,
         text=message,
@@ -139,7 +156,7 @@ def reply_to_message(message, timestamp, channel):
         icon_emoji=':robot_face:'
     )
 
-    slack_client.api_call("reactions.add", name="robot_face", channel=channel, timestamp=timestamp)
+    slack_client.api_call("reactions.add", name="robot_face", channel=channel, timestamp=response['ts'])
 
 
 def reply_and_react(message, emoji, channel, timestamp):
@@ -173,14 +190,16 @@ def normalize(value):
 
 
 def listen(channel):
-    if slack_client.rtm_connect():
-        slack_client.api_call("channel.mark", channel=channel)
-        while slack_client.server.connected is True:
-            parse_bot_commands(slack_client.rtm_read())
-            time.sleep(1)
-    else:
-        print("Connection Failed")
-
+        try:
+            if slack_client.rtm_connect():
+                slack_client.api_call("channel.mark", channel=channel)
+            while slack_client.server.connected is True:
+                parse_bot_commands(slack_client.rtm_read())
+                time.sleep(1)
+            else:
+                print("Connection Failed")
+        except:
+            print("See, they broke it!")
 
 def get_conversation_history(channel):
     messages = slack_client.api_call("conversations.history", channel=channel)
@@ -226,14 +245,16 @@ def test_svm(testing_data, labels, file_name='svm_data.dat'):
     correct = np.count_nonzero(mask)
     return correct * 100.0 / len(result)
 
+
 # testing, enter a channel ID between the quotes (find in URL)
 # send_a_message("I'm so excited to start judging you and your conversations!!", "")
-#listen("")
+listen("")
 # prepare_training_data("messages.txt", "messageData.txt")
 #get_conversation_history("")
 
 
 #SVM
+
 m_list = get_message_points("messages.txt", "messageData.txt")
 
 l_list = get_labels("labels.txt", m_list)
@@ -248,3 +269,4 @@ test_data = svm_tt_data[20:]
 
 train_svm(train_data, l_list[:80])
 print("SVM was " + str(test_svm(test_data, l_list[20:])) + "% accurate")
+
